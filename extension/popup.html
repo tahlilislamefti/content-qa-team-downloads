@@ -1,0 +1,59 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1">
+  <title>Content QA Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="popup">
+  <main>
+    <h1>Content QA Assistant</h1>
+
+    <p class="muted">
+      Phase 1 · Multiple Google Sheets · No AI API
+    </p>
+
+    <label for="project">Project / content sheet</label>
+    <select id="project"></select>
+
+    <div id="current" class="info">
+      Detecting active Google Doc…
+    </div>
+
+    <button id="run" class="primary" disabled>
+      Audit Current Document
+    </button>
+
+    <button id="compareTabs" class="secondary" disabled>
+      Compare Two Tabs in This Document
+    </button>
+    <p class="muted">
+      For documents with exactly two content tabs. The first is treated as
+      the source, the second as its translation.
+    </p>
+
+    <label for="row">Or check a spreadsheet row</label>
+
+    <div class="inline">
+      <input id="row"
+             type="number"
+             min="1"
+             step="1"
+             placeholder="e.g. 4">
+
+      <button id="rowRun">Audit Row</button>
+    </div>
+
+    <button id="settings" class="secondary">
+      Manage Projects &amp; Rules
+    </button>
+
+    <p id="status" role="status" class="muted"></p>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

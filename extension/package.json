@@ -1,0 +1,9 @@
+{
+  "name": "universal-content-qa-assistant",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/smoke.mjs"
+  }
+}

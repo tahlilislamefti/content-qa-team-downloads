@@ -1,0 +1,425 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1e293b;
+  margin: 0;
+  background: #f8fafc;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 10px 12px;
+  background: white;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: #175cb8;
+  color: #fff;
+  border-color: #175cb8;
+}
+
+.secondary {
+  background: white;
+  color: #175cb8;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.popup {
+  width: 365px;
+  max-width: 95vw;
+  background: white;
+}
+
+.popup main {
+  padding: 20px;
+}
+
+.popup h1 {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.popup button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.popup label {
+  font-weight: 600;
+  display: block;
+  margin-top: 16px;
+}
+
+.inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.inline button {
+  width: auto;
+  white-space: nowrap;
+}
+
+.inline input {
+  flex: 1;
+  min-width: 0;
+}
+
+.info {
+  padding: 14px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  width: 100%;
+  background: white;
+}
+
+.report .wrap {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 30px 22px;
+}
+
+.report header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.report h1 {
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 6px 0 8px;
+}
+
+.report h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.report h3 {
+  font-size: 17px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: .13em;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px;
+  margin: 18px 0;
+  box-shadow: 0 2px 7px #00000007;
+}
+
+.card > .muted {
+  margin-top: 2px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.metric {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metricValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.metricLabel {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.row2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 20px;
+}
+
+.finding {
+  position: relative;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 15px;
+  margin: 11px 0;
+}
+
+.findingHead {
+  font-weight: 700;
+  max-width: 75%;
+}
+
+.flag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: .05em;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 3px 8px;
+  margin-top: 8px;
+}
+
+.flag.required {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.flag.verify {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.flag.optional {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.finding p {
+  margin: 7px 0;
+}
+
+.original {
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.note {
+  border-left: 3px solid #94a3b8;
+  padding-left: 10px;
+  color: #64748b;
+}
+
+.success {
+  color: #16734b;
+}
+
+.warning {
+  color: #854d0e;
+}
+
+.error {
+  padding: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  color: #991b1b;
+}
+
+.actions {
+  margin: 25px 0;
+}
+
+.report footer {
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+.optionsWrap {
+  max-width: 850px;
+  margin: 36px auto;
+  padding: 25px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.formgrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.options label {
+  font-weight: 600;
+}
+
+.options label input {
+  display: block;
+  margin-top: 5px;
+}
+
+.options .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.options .checkbox input {
+  width: 18px;
+}
+
+.options h2 {
+  margin-top: 22px;
+}
+
+select {
+  width: 100%;
+  font: inherit;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+  color: #0f172a;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(.98);
+}
+
+.popup label {
+  margin-top: 14px;
+}
+
+.popup select {
+  margin-top: 5px;
+}
+
+.projectBar {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+
+.projectBar .grow {
+  flex: 1;
+}
+
+.projectBar label select {
+  display: block;
+  margin-top: 5px;
+}
+
+.actionRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 22px 0 10px;
+}
+
+.actionRow button {
+  padding: 10px 16px;
+}
+
+.optionsWrap h1 {
+  margin: 8px 0;
+}
+
+.optionsWrap h2 {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 22px;
+  margin: 27px 0 12px;
+}
+
+.optionsWrap h3 {
+  margin-top: 22px;
+}
+
+.options select {
+  margin-top: 5px;
+}
+
+.options .formgrid > label {
+  display: block;
+}
+
+.options .formgrid > label input {
+  margin-top: 5px;
+}
+
+.options .checkbox {
+  align-items: center;
+}
+
+.options .checkbox input {
+  display: inline-block;
+  margin: 0;
+}
+
+.mapFields[hidden] {
+  display: none !important;
+}
+
+#status {
+  white-space: normal;
+}
+
+@media (max-width: 650px) {
+  .projectBar {
+    flex-wrap: wrap;
+  }
+
+  .projectBar .grow {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .formgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .report header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

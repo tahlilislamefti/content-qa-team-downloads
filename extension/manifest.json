@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Universal Content QA Assistant — Team Pilot",
+  "short_name": "Content QA",
+  "description": "Configurable read-only Google Docs audits with optional Google Sheets and project-specific rules. No AI API required.",
+  "version": "2.1.2",
+  "minimum_chrome_version": "106",
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://docs.googleapis.com/*",
+    "https://sheets.googleapis.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "action": {
+    "default_title": "Content QA Assistant",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "oauth2": {
+    "client_id": "180564719403-1e7nt6ejni1mfp32djs4r24eg7mf850v.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/documents.readonly",
+      "https://www.googleapis.com/auth/spreadsheets.readonly"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvhZsU6qi3I0NIR8v/gvwePS6FHGYZKhWkSkvkR5bj1bAVGu35MiYJL1aNpiSPRwA/D1DQB4QQOvACiPe6n/Mn8hGnfZcUj1MyYerFY/PKjBy7xxE925DNapEIIwVRpVdGwNEQafotmjvE5F9e2/gT/+oW4Y2Cz3lok8lc5Co86zajem7w2BARbLZkbmAHt/CypQhmnaCjCL7eMoGtavNQjXVuxDj48QCzYw/kZxEn6JqLxrvJOPTyfjOUt3dnOMlyF0JF/m+XAfuProY3qXp/wKLP+SzqwjZsFIIZqlEFTvohuTkN+6jQHah2xy/7hbh5grDDxzW5yRUoOzms1IMQQIDAQAB"
+}

@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1">
+
+  <title>Content QA Report</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="report">
+  <div class="wrap">
+
+    <header>
+      <div>
+        <div class="eyebrow">
+          CONTENT QA ASSISTANT · PHASE 1
+        </div>
+
+        <h1>Content QA Report</h1>
+
+        <p class="muted">
+          Read-only rules audit of Google Docs
+          and linked translations.
+        </p>
+      </div>
+
+      <button id="settings" class="secondary">
+        Projects &amp; Rules
+      </button>
+    </header>
+
+    <div id="status" class="info" role="status">
+      Preparing audit…
+    </div>
+
+    <section id="summary" hidden></section>
+
+    <section id="results"></section>
+
+    <div class="actions">
+      <button id="csv" class="secondary" disabled>
+        Download CSV findings
+      </button>
+    </div>
+
+    <footer class="muted">
+      No AI calls or document edits.
+      Article words exclude material before H1;
+      full document words include it.
+      Counts are whitespace-separated tokens
+      and can differ from Google Docs' built-in counter.
+    </footer>
+
+  </div>
+
+  <script type="module" src="report.js"></script>
+</body>
+</html>

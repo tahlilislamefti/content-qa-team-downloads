@@ -1,0 +1,326 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Content QA — Projects & Rules</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="options">
+<main class="optionsWrap">
+
+  <div class="eyebrow">CONTENT QA ASSISTANT · MULTI-PROJECT</div>
+
+  <h1>Projects, content sheets & rules</h1>
+
+  <p class="muted">
+    Add as many Google Sheets profiles as needed.
+    Each project has its own tab, column mapping,
+    optional topical map and saved audit rules.
+    All settings remain in this Chrome profile.
+  </p>
+
+  <div class="projectBar">
+    <label class="grow">
+      Active project
+      <select id="project"></select>
+    </label>
+
+    <button type="button" id="add">+ Add project</button>
+    <button type="button" id="remove">Delete project</button>
+  </div>
+
+  <form id="form">
+
+    <h2>1. Google Sheets source</h2>
+
+    <div class="formgrid">
+      <label>Project name
+        <input id="name" name="name" required
+               placeholder="e.g. Dental Website">
+      </label>
+
+      <label>Google Sheet URL or ID
+        <input id="spreadsheet" name="spreadsheet"
+               placeholder="https://docs.google.com/spreadsheets/d/...">
+      </label>
+
+<label>Approved website domain
+  <input
+    id="approvedDomain"
+    name="approvedDomain"
+    type="url"
+    placeholder="https://www.example.com">
+</label>
+<label>Source language label
+  <input name="sourceLanguage" placeholder="English">
+</label>
+<label>Translation language label
+  <input name="translationLanguage" placeholder="Dutch">
+</label>
+
+      <label>Sheet tab name (exact)
+        <input id="tab" name="tab"
+               placeholder="e.g. Content Planner">
+      </label>
+
+      <label>Header row
+        <input id="headerRow" name="headerRow" type="number" min="1">
+      </label>
+
+      <label>First content row
+        <input id="firstDataRow" name="firstDataRow" type="number" min="2">
+      </label>
+
+      <label>Last row to scan (max 3,001 rows)
+        <input id="lastDataRow" name="lastDataRow" type="number" min="2">
+      </label>
+    </div>
+
+    <div class="actionRow">
+      <button type="button" id="detect">
+        Detect columns from header
+      </button>
+      <button type="button" id="test">
+        Test sheet access
+      </button>
+    </div>
+
+    <h2>2. Column mapping</h2>
+
+    <p class="muted">
+      Enter column letters (A, B, C, ...).
+      You only need one document-link column;
+      two enable English–Dutch comparison.
+      Empty optional columns are skipped.
+    </p>
+
+    <div class="formgrid">
+      <label>Topic / article URL
+        <input name="topic" class="colInput" placeholder="D">
+      </label>
+
+      <label>Page type
+        <input name="pageType" class="colInput" placeholder="E">
+      </label>
+
+      <label>English draft document link
+        <input name="english" class="colInput" placeholder="I">
+      </label>
+
+      <label>Dutch draft document link
+        <input name="dutch" class="colInput" placeholder="O">
+      </label>
+
+      <label>Published page link
+        <input name="published" class="colInput" placeholder="AF">
+      </label>
+
+      <label>Primary keyword
+        <input name="primaryKeyword" class="colInput" placeholder="optional">
+      </label>
+
+      <label>Approved Dutch keyword
+        <input name="primaryDutch" class="colInput" placeholder="optional">
+      </label>
+
+      <label>Secondary keywords
+        <input name="secondaryKeywords" class="colInput" placeholder="optional">
+      </label>
+
+      <label>Supporting terms
+        <input name="supportingKeywords" class="colInput" placeholder="optional">
+      </label>
+    </div>
+
+    <h2>3. Topical map</h2>
+
+    <label>Reference source
+      <select name="mapMode" id="mapMode">
+        <option value="none">No topical map (skip topical-map check)</option>
+        
+        <option value="sheet">Another Google Sheet containing the topical map</option>
+      </select>
+    </label>
+
+    <div id="mapSheetFields" class="formgrid mapFields" hidden>
+      <label>Topical-map Google Sheet URL
+        <input name="mapSpreadsheet" placeholder="Sheet URL or ID">
+      </label>
+
+      <label>Topical-map tab name
+        <input name="mapTab" placeholder="Topical Map">
+      </label>
+
+      <label>First map data row
+        <input name="mapFirstDataRow" type="number" min="1">
+      </label>
+
+      <label>Map URL/path column
+        <input name="mapPathColumn" class="colInput" placeholder="A">
+      </label>
+
+      <label>Map keyword column
+        <input name="mapKeywordColumn" class="colInput" placeholder="B">
+      </label>
+    </div>
+
+    <h2>4. Saved rules for this project</h2>
+
+<h3>Choose which checks to run</h3>
+
+<label class="checkbox">
+  <input
+    type="checkbox"
+    name="checkInternalLinks"
+    checked>
+  Check internal-link domains and English–Dutch link differences
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkSeoTitle" checked>
+  Check SEO title presence and character length
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkMetaDescription" checked>
+  Check meta description presence and character length
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkHeadingStructure" checked>
+  Check H1, H2 and H3 headings, hierarchy and length
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkIntroduction" checked>
+  Check introduction word count and paragraph count
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkFaqs" checked>
+  Check minimum FAQ count
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkPrimaryKeyword" checked>
+  Check primary keyword presence
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkContentLength" checked>
+  Check article word count against page-type requirements
+</label>
+
+<label class="checkbox">
+  <input type="checkbox" name="checkTranslationLength" checked>
+  Check English-Dutch translation word-count difference
+</label>
+
+    <p class="muted">
+      0 disables a numeric check.
+      New projects start with conservative settings;
+      adjust them to your own content instructions.
+    </p>
+
+    <div class="formgrid">
+      <label>SEO title maximum characters
+        <input name="titleMax" type="number" min="0" max="1000">
+      </label>
+
+      <label>Meta description maximum characters
+        <input name="descriptionMax" type="number" min="0" max="1000">
+      </label>
+
+      <label>H2 maximum characters (0 disables)
+        <input name="h2MaxChars" type="number" min="0" max="1000">
+      </label>
+
+      <label>H3 maximum characters (0 disables)
+        <input name="h3MaxChars" type="number" min="0" max="1000">
+      </label>
+
+      <label>Introduction min words
+        <input name="introMin" type="number" min="0" max="1000">
+      </label>
+
+      <label>Introduction max words
+        <input name="introMax" type="number" min="0" max="1000">
+      </label>
+
+      <label>Introduction paragraphs
+        <input name="introParagraphs" type="number" min="0" max="1000">
+      </label>
+
+      <label>Minimum FAQs
+        <input name="minFaq" type="number" min="0" max="1000">
+      </label>
+
+      <label>EN/NL word count difference max % (0 disables)
+        <input name="translationDiffPct" type="number" min="0" max="100">
+      </label>
+
+      <label class="checkbox">
+        <input name="requireOpeningTable" type="checkbox">
+        Require a table immediately after the introduction
+      </label>
+    </div>
+
+    <h3>Article word-count ranges (optional)</h3>
+<p class="muted">Optional custom page types can be added below, such as TECH or PRODUCT.</p>
+
+    <div class="formgrid">
+      <label>HUB
+        <input name="HUB" placeholder="e.g. 1800-2400">
+      </label>
+
+      <label>PILLAR
+        <input name="PILLAR" placeholder="e.g. 2000-2600">
+      </label>
+
+      <label>LANDING
+        <input name="LANDING" placeholder="e.g. 500-900">
+      </label>
+
+      <label>SUPPORTIVE
+        <input name="SUPPORTIVE" placeholder="e.g. 1200-1750">
+      </label>
+
+      <label>KNOWLEDGE
+        <input name="KNOWLEDGE" placeholder="e.g. 1400-1800">
+      </label>
+    </div>
+
+    <label>Additional page types (one per line: TYPE = MIN-MAX)
+      <textarea name="extraWordTargets" rows="5"
+        style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit"
+        placeholder="TECH = 1500-2400"></textarea>
+    </label>
+    <div class="actionRow">
+      <button type="submit" class="primary">
+        Save project & rules
+      </button>
+
+      <button type="button" id="exportSettings">
+        Export profiles backup
+      </button>
+
+      <button type="button" id="importSettings">
+        Import profiles backup
+      </button>
+
+      <input id="importFile" type="file"
+             accept=".json,application/json" hidden>
+    </div>
+
+    <p id="status" role="status" class="info">Ready.</p>
+
+  </form>
+
+</main>
+
+<script type="module" src="options.js"></script>
+</body>
+</html>
