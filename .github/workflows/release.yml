@@ -1,0 +1,81 @@
+name: Build and publish v2.1.2 public team ZIPs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Chrome identity and source checks
+        shell: bash
+        run: |
+          cd extension
+          node --input-type=module <<'JS'
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const m=JSON.parse(readFileSync('manifest.json','utf8'));
+          if(m.version!=='2.1.2') throw Error('Unexpected extension version');
+          const d=createHash('sha256').update(Buffer.from(m.key,'base64')).digest('hex').slice(0,32);
+          const id=[...d].map(c=>String.fromCharCode(97+parseInt(c,16))).join('');
+          if(id!=='hklpmnbndociojhhmdddmhbohoacihac') throw Error('Extension ID mismatch: '+id);
+          if(m.oauth2.client_id!=='180564719403-1e7nt6ejni1mfp32djs4r24eg7mf850v.apps.googleusercontent.com')throw Error('OAuth client does not match team');
+          console.log('Validated stable Chrome ID:',id);
+          JS
+          for f in client.js config.js core.js options.js popup.js profiles.js report.js; do node --check "$f"; done
+          npm test
+          if grep -iE 'isolation-2026|Isolatietechniek|spouwmuurisolatie|1k8oce|New Sept 2026|getInsulationTopicMap_' *.js *.html; then
+            echo 'Client-specific content detected' >&2
+            exit 1
+          fi
+      - name: Build both installable ZIPs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root=Path('extension')
+          files=('manifest.json','client.js','config.js','core.js',
+                 'options.html','options.js','popup.html','popup.js',
+                 'profiles.js','report.html','report.js','style.css')
+          for f in files:
+              if not (root/f).is_file(): raise SystemExit('Missing: '+f)
+          out=Path('dist'); out.mkdir(exist_ok=True)
+          extension=out/'Content_QA_v2.1.2_EXTENSION_ONLY.zip'
+          kit=out/'Content_QA_v2.1.2_TEAM_KIT.zip'
+          with ZipFile(extension,'w',ZIP_DEFLATED) as z:
+              for f in files:z.write(root/f,f)
+          with ZipFile(kit,'w',ZIP_DEFLATED) as z:
+              for f in files:z.write(root/f,'Extension/'+f)
+              z.write('INSTALL.md','INSTALL.md')
+              z.write('README.md','START_HERE.md')
+          for archive,expected in ((extension,'manifest.json'),(kit,'Extension/manifest.json')):
+              with ZipFile(archive) as z:
+                  assert expected in z.namelist()
+              print(archive,archive.stat().st_size,'bytes')
+          PY
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2.1.2-public-team-zips
+          path: dist/*.zip
+      - name: Publish GitHub Release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=v2.1.2-public-team
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/*.zip --clobber
+          else
+            gh release create "$TAG" dist/*.zip --target "$GITHUB_SHA" \
+              --title "Content QA Assistant v2.1.2 — Free Team Download" \
+              --notes-file RELEASE_NOTES.md
+          fi
